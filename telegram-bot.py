@@ -6,7 +6,11 @@ from random import randint
 
 def start(bot, update):
     chat_id = update.message.chat_id
-    bot.send_message(chat_id=chat_id, text='hello my nigger')
+    description="""
+    Yo! What's up, Im Joey the Bot
+    I can do some cool stuff
+    """
+    bot.send_message(chat_id=chat_id, text=description)
 
 def pic(bot, update):
     print('pic called')
@@ -33,7 +37,7 @@ def dp_(bot, update):
     bot.send_photo(chat_id=chat_id, photo=src)
     driver.close()
 
-def reply(bot, update):
+def read(bot, update):
     user_input = update.message.text
     if 'hi' in user_input:
         update.message.reply_text("Aye! What's up homie")
@@ -46,7 +50,7 @@ def main():
     dp.add_handler(CommandHandler('start',start))
     dp.add_handler(CommandHandler('dp',dp_))
     dp.add_handler(CommandHandler('pic',pic))
-    dp.add_handler(MessageHandler(Filters.text, reply))
+    dp.add_handler(MessageHandler(Filters.text, read))
     updater.start_polling()
     updater.idle()
 
