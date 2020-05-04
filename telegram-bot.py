@@ -4,6 +4,7 @@ import re
 from selenium import webdriver
 from random import randint
 import json
+import weather
 
 def start(bot, update):
     chat_id = update.message.chat_id
@@ -26,33 +27,30 @@ def pic(bot, update):
     bot.send_photo(chat_id=chat_id, photo=src)
     driver.close()
 
-def dp_(bot, update):
-    print("dp called")
-    url='https://picsum.photos/500'
-    response=requests.get(url)
-    driver=webdriver.Chrome()
-    driver.get(response.url)
-    pic=driver.find_element_by_xpath('/html/body/img')
-    src=pic.get_attribute('src')
-    chat_id = update.message.chat_id
-    bot.send_photo(chat_id=chat_id, photo=src)
-    driver.close()
-
 def read(bot, update):
     user_input = update.message.text
     if 'hi' in user_input:
         update.message.reply_text("Aye! What's up homie")
+    return user_input
 
-
+def weather_(bot, update):
+    chat_id = update.message.chat_id
+    bot.send_message(chat_id=chat_id, text="Enter City name")
+    city=update.MessageHandler(Filters.text)
+    # city = update.message.text.split(' ')
+    print(city)
+    result=weather.tellWeather(city[-1])
+    bot.send_message(chat_id=chat_id, text=result)
 
 def main():
     key=open('config.json','r')
-    key=json(key)
+    key=json.load(key)
+    print(key["telegram_bot_token"])
     updater = Updater(key["telegram_bot_token"])
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('start',start))
-    dp.add_handler(CommandHandler('dp',dp_))
     dp.add_handler(CommandHandler('pic',pic))
+    dp.add_handler(CommandHandler('weather',weather_))
     dp.add_handler(MessageHandler(Filters.text, read))
     updater.start_polling()
     updater.idle()
