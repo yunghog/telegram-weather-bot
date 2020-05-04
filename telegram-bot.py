@@ -3,6 +3,7 @@ import requests
 import re
 from selenium import webdriver
 from random import randint
+import json
 
 def start(bot, update):
     chat_id = update.message.chat_id
@@ -45,7 +46,9 @@ def read(bot, update):
 
 
 def main():
-    updater = Updater('1230910993:AAECpkgUiUn0tNB6_UzUh5LpmSZEpZQ_ub8')
+    key=open('config.json','r')
+    key=json(key)
+    updater = Updater(key["telegram_bot_token"])
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('start',start))
     dp.add_handler(CommandHandler('dp',dp_))
