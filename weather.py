@@ -6,7 +6,7 @@ import requests, json
 key=open("config.json","r")
 key=json.load(key)
 def tellWeather(city):
-    api_key = key["weather_token"]
+    api_key = key["weather_api_token"]
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     city_name = city
     complete_url = base_url + "appid=" + api_key + "&q=" + city_name
