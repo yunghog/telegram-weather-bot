@@ -37,8 +37,7 @@ def weather_(bot, update):
     chat_id = update.message.chat_id
     bot.send_message(chat_id=chat_id, text="Enter City name")
     city=update.MessageHandler(Filters.text)
-    # city = update.message.text.split(' ')
-    print(city)
+    city = update.message.text.split(' ')
     result=weather.tellWeather(city[-1])
     bot.send_message(chat_id=chat_id, text=result)
 
