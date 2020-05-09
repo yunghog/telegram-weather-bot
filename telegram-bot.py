@@ -1,4 +1,4 @@
-from telegram.ext import Updater, InlineQueryHandler, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, InlineQueryHandler, CommandHandler, MessageHandler, Filters, ConversationHandler
 import requests
 import re
 from selenium import webdriver
@@ -30,7 +30,8 @@ def pic(bot, update):
 def read(bot, update):
     user_input = update.message.text
     if 'hi' in user_input:
-        update.message.reply_text("Aye! What's up homie")
+        update.message.reply_text("Aye! What's up homie\nWhats yo name")
+    update.message.reply_text("Hi",name)
     return user_input
 
 def weather_(bot, update):
@@ -40,6 +41,7 @@ def weather_(bot, update):
     city = update.message.text.split(' ')
     result=weather.tellWeather(city[-1])
     bot.send_message(chat_id=chat_id, text=result)
+
 
 def main():
     key=open('config.json','r')
@@ -53,6 +55,8 @@ def main():
     dp.add_handler(MessageHandler(Filters.text, read))
     updater.start_polling()
     updater.idle()
+
+
 
 if __name__ == '__main__':
     main()
