@@ -31,12 +31,9 @@ def read(bot, update):
     user_input = update.message.text
     if 'hi' in user_input:
         update.message.reply_text("Aye! What's up homie\nWhats yo name")
-    update.message.reply_text("Hi",name)
-    return user_input
 
 def weather_(bot, update):
     chat_id = update.message.chat_id
-    bot.send_message(chat_id=chat_id, text="Enter City name")
     city=update.MessageHandler(Filters.text)
     city = update.message.text.split(' ')
     result=weather.tellWeather(city[-1])
