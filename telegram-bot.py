@@ -48,7 +48,6 @@ def main():
     dp.add_handler(CommandHandler('start',start))
     dp.add_handler(CommandHandler('pic',pic))
     dp.add_handler(CommandHandler('weather',weather_))
-    dp.add_handler(MessageHandler(Filters.text, read))
     updater.start_polling()
     updater.idle()
 
