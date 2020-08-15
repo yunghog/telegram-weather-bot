@@ -1,2 +1,1 @@
-# joey-bot
-telegram bot
+#telegram weather bot
